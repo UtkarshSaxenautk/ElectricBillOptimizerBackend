@@ -11,7 +11,6 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send("welcome");
 })
-
-app.listen(5000, () => {
-    console.log('Listening on port 5000');
-})
+mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+    .then(() => app.listen(process.env.PORT, () => console.log(`server is running on port ${process.env.PORT}`)))
+    .catch(err => console.log(err))
