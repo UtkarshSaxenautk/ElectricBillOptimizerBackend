@@ -1,8 +1,12 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-Schema = new mongoose.Schema
+const Schema =  mongoose.Schema
 
 const AppliancesSchema = new Schema({
+    userId: {
+        type: 'string',
+        required: true,
+    },
     user : {
         type: 'string',
         required: true,
@@ -29,25 +33,7 @@ const AppliancesSchema = new Schema({
                 type: 'string',
                 required: true
             }
-        },
-        {
-            name: {
-                type: 'string',
-                required: true,
-            },
-            power: {
-                type: 'number',
-                required: true,
-            },
-            expectedhour: {
-                type: 'number',
-                required: true,
-            },
-            location: {
-                type: 'string',
-                required: true
-            }
-        },
+        }
     ]
 })
 
