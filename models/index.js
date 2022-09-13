@@ -1,19 +1,17 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-const Schema =  mongoose.Schema
-
-const AppliancesSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     userId: {
         type: 'string',
         required: true,
     },
-    user : {
+    user: {
         type: 'string',
         required: true,
     },
     total: {
         type: 'number',
-        required:true,
+        required: true,
     },
     appliances: [
         {
@@ -37,5 +35,5 @@ const AppliancesSchema = new Schema({
     ]
 })
 
-const Appliances = mongoose.model(' Appliances', AppliancesSchema)
-export default Appliances
+const User = mongoose.model('appliances', UserSchema)
+module.exports  = User;
