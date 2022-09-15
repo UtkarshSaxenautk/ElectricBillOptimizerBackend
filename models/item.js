@@ -13,7 +13,7 @@ const ApplianceSchema = new mongoose.Schema({
                 required:true,
             },
             consumption: {
-                type: 'string',
+                type: 'number',
                 required:true,
             }
         } 
