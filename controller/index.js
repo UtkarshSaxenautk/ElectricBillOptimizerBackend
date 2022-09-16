@@ -1,3 +1,5 @@
+const ShowAppliance = require("../models/appliance.js");
+const Hourly = require("../models/hourlyReport.js");
 const  User  = require("../models/index.js");
 const Appliance = require('../models/item.js');
 
@@ -38,6 +40,35 @@ const createUser = async (req, res) => {
         res.status(409).json({ error: error.message })
     }
 }
+const sendHourlyReport = async (req, res) => {
+    const hour = await Hourly.findOne({ name: req.body.name });
+
+    try {
+        if (hour === null) {
+            const newhour = new Hourly(req.body);
+            newhour.save();
+        }
+        else {
+           await hour.update("$push" , {hoursUsed : req.body.hoursUsed})
+        }
+        
+        res.status(201).json("Hurray hourly data posted successfully");
+    } catch (error) {
+        res.status(409).json({ error: error.message })
+    }
+}
+
+const postShowAppliance = async (req, res) => {
+    const showAppliance = new ShowAppliance(req.body);
+    try {
+        await showAppliance.save();
+        res.status(201).json(showAppliance);
+    } catch (error) {
+        res.status(409).json({ error: error.message })
+    }
+}
 
 
-module.exports = {readAppliance , writeAppliance , readUser , createUser}
+
+
+module.exports = {readAppliance , writeAppliance , readUser , createUser , sendHourlyReport , postShowAppliance}
