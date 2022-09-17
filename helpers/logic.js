@@ -74,7 +74,15 @@ function breakIntodays(exp_bill) {
 
 const Recommend_by_item = (userdata) => {
     const total_time = 0;
-   //for(let  )
+    for (let i = 0; i < userdata.length; i++){
+        total_time += userdata[i].total_time;
+
+    }
+    console.log(total_time);
+    allowedApplinces = [];
+    for (appliance in userdata.appliances) {
+       // let 
+    }
 }
 
 const CheckFeasibility = (userdata) => {
@@ -99,7 +107,7 @@ const CheckFeasibility = (userdata) => {
     const hours_appliance_should_decrease = [];
     for (var i = 0; i < userdata.appliances.length; i++) {
         var extra_hours = per_appliance_chnaged_needed / userdata.appliances[i].power;
-        hours_appliance_should_decrease.push({name : userdata.appliances[i].name , extraminutes : Math.round(extra_hours*60) , brand: userdata.appliances[i].brand})
+        hours_appliance_should_decrease.push({name : userdata.appliances[i].name , extraminutes : Math.round(extra_hours*60) , brand: userdata.appliances[i].brand , msg:"failed"})
     }
     return hours_appliance_should_decrease;
 }
