@@ -1,11 +1,11 @@
 //const twilio = require('twilio');
 
-// const accountSid = 'ACc283cd867f2b156d9100906d868d0bd4'; // Your Account SID from www.twilio.com/console
-// const authToken = '55098536abd03cf0969bf77d1f4bffae'; // Your Auth Token from www.twilio.com/console
-// const parsePhoneNumber = require('libphonenumber-js');
+const accountSid = 'ACc283cd867f2b156d9100906d868d0bd4'; // Your Account SID from www.twilio.com/console
+const authToken = '55098536abd03cf0969bf77d1f4bffae'; // Your Auth Token from www.twilio.com/console
+const parsePhoneNumber = require('libphonenumber-js');
 
 
-const client = require("twilio")(process.env.ACCOUNTSID, process.env.AUTHTOKEN);
+const client = require("twilio")(accountSid, authToken);
 
 const Call = () => {
   
