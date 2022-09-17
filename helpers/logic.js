@@ -1,3 +1,5 @@
+const { SuccessMessage } = require("../sdk/twilio");
+
 const Unit_price = 5.00;
 
 // def checkPossibility(data,expected_bill):
@@ -111,6 +113,7 @@ const CheckFeasibility = (userdata) => {
     const practical_bill = units * Unit_price
     console.log(practical_bill)
     if (practical_bill - userdata.bill <= 50) {
+        SuccessMessage("Congratulations! You have successfully subscribed to bill optimization!")
         return {"userbill" : userdata.bill , "our bill": practical_bill , "msg" : "your bill will be optimized"}
     } 
     const extra_per_day_power = (((practical_bill - userdata.bill) / Unit_price) * 1000) / 30;
@@ -124,9 +127,6 @@ const CheckFeasibility = (userdata) => {
     const branddata = Recommend_by_item(userdata)
     return { hours_appliance_should_decrease, "msg": "failed" , branddata };
 }
-
 console.log(CheckFeasibility(sample_data));
-
-
 module.exports = CheckFeasibility
 

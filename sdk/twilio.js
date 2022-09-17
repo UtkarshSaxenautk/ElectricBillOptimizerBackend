@@ -5,10 +5,10 @@ const authToken = '55098536abd03cf0969bf77d1f4bffae'; // Your Auth Token from ww
 const parsePhoneNumber = require('libphonenumber-js');
 
 
-
+const client = require("twilio")(accountSid, authToken);
 
 const Call = () => {
-  const client = require("twilio")(accountSid, authToken);
+  
    client.messages.create({
      body: 'This is your dad',
      from: '+18156571779',
@@ -19,8 +19,17 @@ const Call = () => {
     })
 }
 
+const SuccessMessage = (msg) => {
+  client.messages.create({
+    body: msg,
+    from: '+18156571779',
+    to : '+917985259022'
+  })
+}
 
-module.exports = Call
+
+
+module.exports = { Call, SuccessMessage }
 
 
 
