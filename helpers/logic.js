@@ -1,4 +1,4 @@
-const Unit_price = 4.00;
+const Unit_price = 5.00;
 
 // def checkPossibility(data,expected_bill):
 //     daily_power=0
@@ -71,6 +71,12 @@ function breakIntodays(exp_bill) {
     return expected_power_usage_according_to_exp_bill_per_day;
 }
 
+
+const Recommend_by_item = (userdata) => {
+    const total_time = 0;
+   // for(let )
+}
+
 const CheckFeasibility = (userdata) => {
     daily_power = 0 
     total_time = 0
@@ -82,7 +88,7 @@ const CheckFeasibility = (userdata) => {
     console.log(daily_power);
     const power_in_month = daily_power * 30 
     const units=power_in_month/1000
-    const practical_bill = units * 1.29
+    const practical_bill = units * Unit_price
     console.log(practical_bill)
     if (practical_bill - userdata.bill <= 13) {
         return "horray your bill will be optimized";
@@ -95,7 +101,6 @@ const CheckFeasibility = (userdata) => {
         var extra_hours = per_appliance_chnaged_needed / userdata.appliances[i].power;
         hours_appliance_should_decrease.push({name : userdata.appliances[i].name , extraminutes : Math.round(extra_hours*60) , brand: userdata.appliances[i].brand})
     }
-    
     return hours_appliance_should_decrease;
 }
 
