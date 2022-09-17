@@ -53,12 +53,9 @@ const sendHourlyReport = async (req, res) => {
             const addUsage = currusage.usage.power + parseInt(req.body.usage.power);
             const temp = {power: addUsage , limit: true}
             console.log(temp)
-            // currusage.updateOne({ id: req.body.id } , {usage : temp})
-            //Hourly.findByIdAndUpdate(mongoID, temp)
             Hourly.findByIdAndUpdate(mongoID, {$set:{usage:temp}}).then(result => {
                 console.log('result', result)
             })
-       // res.json({redirect : '/get-topic'})
         }
         else {
             const report = new Hourly(req.body);
