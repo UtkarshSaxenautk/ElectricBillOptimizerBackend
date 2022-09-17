@@ -72,16 +72,12 @@ function breakIntodays(exp_bill) {
 }
 
 
-const Recommend_by_item = (userdata) => {
-    const total_time = 0;
-    for (let i = 0; i < userdata.length; i++){
-        total_time += userdata[i].total_time;
-
-    }
-    console.log(total_time);
-    allowedApplinces = [];
-    for (appliance in userdata.appliances) {
-       // let 
+const Recommend_by_item = (userdata , extra_per_day_power) => {
+    for (let i = 0; i < userdata.appliances.length; i++) {
+        if (userdata.appliances[i].name === "bulb") {
+           
+       }
+        
     }
 }
 
@@ -98,7 +94,7 @@ const CheckFeasibility = (userdata) => {
     const units=power_in_month/1000
     const practical_bill = units * Unit_price
     console.log(practical_bill)
-    if (practical_bill - userdata.bill <= 13) {
+    if (practical_bill - userdata.bill <= 50) {
         return {"userbill" : userdata.bill , "our bill": practical_bill , "msg" : "your bill will be optimized"}
     } 
     const extra_per_day_power = (((practical_bill - userdata.bill) / Unit_price) * 1000) / 30;
@@ -107,9 +103,9 @@ const CheckFeasibility = (userdata) => {
     const hours_appliance_should_decrease = [];
     for (var i = 0; i < userdata.appliances.length; i++) {
         var extra_hours = per_appliance_chnaged_needed / userdata.appliances[i].power;
-        hours_appliance_should_decrease.push({name : userdata.appliances[i].name , extraminutes : Math.round(extra_hours*60) , brand: userdata.appliances[i].brand , msg:"failed"})
+        hours_appliance_should_decrease.push({name : userdata.appliances[i].name , extraminutes : Math.round(extra_hours*60) , brand: userdata.appliances[i].brand })
     }
-    return hours_appliance_should_decrease;
+    return { hours_appliance_should_decrease, "msg": "failed" };
 }
 
 console.log(CheckFeasibility(sample_data));
