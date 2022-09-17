@@ -15,7 +15,15 @@ const UserSchema = new mongoose.Schema({
     },
     appliances: [
         {
+            id: {
+                type: 'number',
+                required:true,
+            },
             name: {
+                type: 'string',
+                required: true,
+            },
+            brand: {
                 type: 'string',
                 required: true,
             },
@@ -29,10 +37,14 @@ const UserSchema = new mongoose.Schema({
             },
             location: {
                 type: 'string',
-                required: true
+                required: false
             }
         }
-    ]
+    ],
+    bill: {
+        type: 'number',
+        required: true
+    }
 })
 
 const User = mongoose.model('appliances', UserSchema)

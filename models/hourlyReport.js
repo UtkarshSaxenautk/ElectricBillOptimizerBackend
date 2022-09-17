@@ -6,11 +6,15 @@ const HourlyReport = new mongoose.Schema({
         type: 'string',
         required: true,
     },
-    hoursUsed: [{
+    usage: [{
         hour: {
             type: 'number',
             required: true,
         },
+        limit: {
+            type: 'boolean',
+            required:true,
+        }
     }
     ],
     timeSent: {
