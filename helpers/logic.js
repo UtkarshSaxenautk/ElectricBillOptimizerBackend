@@ -91,7 +91,7 @@ const CheckFeasibility = (userdata) => {
     const practical_bill = units * Unit_price
     console.log(practical_bill)
     if (practical_bill - userdata.bill <= 13) {
-        return {"userbill" : userdata.bill , "our bill": practical_bill}
+        return {"userbill" : userdata.bill , "our bill": practical_bill , "msg" : "your bill will be optimized"}
     } 
     const extra_per_day_power = (((practical_bill - userdata.bill) / 1.29) * 1000) / 30;
     console.log(extra_per_day_power)
