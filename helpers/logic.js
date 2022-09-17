@@ -74,7 +74,7 @@ function breakIntodays(exp_bill) {
 
 const Recommend_by_item = (userdata) => {
     const total_time = 0;
-   // for(let )
+   //for(let  )
 }
 
 const CheckFeasibility = (userdata) => {
@@ -93,7 +93,7 @@ const CheckFeasibility = (userdata) => {
     if (practical_bill - userdata.bill <= 13) {
         return {"userbill" : userdata.bill , "our bill": practical_bill , "msg" : "your bill will be optimized"}
     } 
-    const extra_per_day_power = (((practical_bill - userdata.bill) / 1.29) * 1000) / 30;
+    const extra_per_day_power = (((practical_bill - userdata.bill) / Unit_price) * 1000) / 30;
     console.log(extra_per_day_power)
     const per_appliance_chnaged_needed = extra_per_day_power / userdata.total 
     const hours_appliance_should_decrease = [];
