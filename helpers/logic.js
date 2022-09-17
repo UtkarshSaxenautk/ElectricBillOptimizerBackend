@@ -71,7 +71,7 @@ function breakIntodays(exp_bill) {
     return expected_power_usage_according_to_exp_bill_per_day;
 }
 
-function CheckFeasibility(userdata) {
+const CheckFeasibility = (userdata) => {
     daily_power = 0 
     total_time = 0
     for (var i = 0; i < userdata.appliances.length; i++) {
@@ -99,5 +99,8 @@ function CheckFeasibility(userdata) {
     return hours_appliance_should_decrease;
 }
 
-console.log(checkFeasibility(sample_data));
+console.log(CheckFeasibility(sample_data));
+
+
+module.exports = CheckFeasibility
 

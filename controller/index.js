@@ -2,7 +2,7 @@ const ShowAppliance = require("../models/appliance.js");
 const Hourly = require("../models/hourlyReport.js");
 const  User  = require("../models/index.js");
 const Appliance = require('../models/item.js');
-
+const CheckFeasibility = require('../helpers/logic.js')
 
 const readAppliance = async (req, res) => {
     try {
