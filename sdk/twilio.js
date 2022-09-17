@@ -19,6 +19,14 @@ const Call = () => {
     })
 }
 
+const Alert = (msg) => {
+  client.messages.create({
+     body: msg,
+     from: '+18156571779',
+     to: '+91785259022'
+   })
+}
+
 const SuccessMessage = (msg) => {
   client.messages.create({
     body: msg,
@@ -29,7 +37,7 @@ const SuccessMessage = (msg) => {
 
 
 
-module.exports = { Call, SuccessMessage }
+module.exports = { Call, SuccessMessage , Alert }
 
 
 

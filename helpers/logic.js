@@ -1,4 +1,4 @@
-const { SuccessMessage } = require("../sdk/twilio");
+const { SuccessMessage , Alert } = require("../sdk/twilio");
 
 const Unit_price = 5.00;
 
@@ -99,6 +99,9 @@ const Recommend_by_item = (userdata) => {
     return recommendedItem
 }
 
+
+
+ 
 const CheckFeasibility = (userdata) => {
     daily_power = 0 
     total_time = 0
@@ -113,7 +116,7 @@ const CheckFeasibility = (userdata) => {
     const practical_bill = units * Unit_price
     console.log(practical_bill)
     if (practical_bill - userdata.bill <= 50) {
-       // SuccessMessage("Congratulations! You have successfully subscribed to bill optimization!")
+       SuccessMessage("Congratulations! You have successfully subscribed to bill optimization!")
         return {"userbill" : userdata.bill , "our bill": practical_bill , "msg" : "your bill will be optimized"}
     } 
     const extra_per_day_power = (((practical_bill - userdata.bill) / Unit_price) * 1000) / 30;
@@ -127,6 +130,24 @@ const CheckFeasibility = (userdata) => {
     const branddata = Recommend_by_item(userdata)
     return { hours_appliance_should_decrease, "msg": "failed" , branddata };
 }
+
+const CheckLimit = ( userData , hourdata , curr) => {
+    var total_power_of_appliance_per_day = 0;
+    var limit_power = 0;
+    var name;
+    for (let i = 0; i < userData.appliances.length; i++){
+        if (userData.appliances[i].id === hourdata.id) {
+            limit_power += userData.appliances[i].power;
+            name = userData.appliances[i].name;
+            total_power_of_appliance_per_day += userData.appliances[i].power * userData.appliances[i].expectedhour;
+        }
+    }
+    if (curr > limit_power || total_power_of_appliance_per_day < hourdata.usage.power) {
+        Alert("Please check your it is taking more than expected")
+        return { value: false, appliance: name } ;
+    }
+    return { value: true, appliance: name } ;
+}
 //console.log(CheckFeasibility(sample_data));
-module.exports = CheckFeasibility
+module.exports = { CheckFeasibility, CheckLimit }
 

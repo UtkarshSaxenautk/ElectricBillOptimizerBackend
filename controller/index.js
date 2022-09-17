@@ -2,8 +2,8 @@ const ShowAppliance = require("../models/appliance.js");
 const Hourly = require("../models/hourlyReport.js");
 const  User  = require("../models/index.js");
 const Appliance = require('../models/item.js');
-const CheckFeasibility = require('../helpers/logic.js');
-const { exists } = require("../models/hourlyReport.js");
+const { CheckFeasibility, CheckLimit } = require('../helpers/logic.js');
+
 
 const readAppliance = async (req, res) => {
     try {
@@ -44,18 +44,29 @@ const createUser = async (req, res) => {
 const sendHourlyReport = async (req, res) => {
     const exist = await Hourly.exists({ id: req.body.id })
     console.log(exist)
-
+   const userdata = await User.findOne({userId:"1"})
     try {
         if (exist !== null) {
             let currusage = await Hourly.findOne({ id: req.body.id })
             console.log(currusage)
             let mongoID = currusage._id
             const addUsage = currusage.usage.power + parseInt(req.body.usage.power);
-            const temp = {power: addUsage , limit: true}
+            var Limit = true
+            result = CheckLimit(userdata , currusage, addUsage)
+            if (result.value) {
+                console.log("Yes got it")
+            }
+            else {
+                console.log("Oops")
+                
+                Limit = false
+            }
+            const temp = {power: addUsage , limit: Limit}
             console.log(temp)
             Hourly.findByIdAndUpdate(mongoID, {$set:{usage:temp}}).then(result => {
                 console.log('result', result)
             })
+            
         }
         else {
             const report = new Hourly(req.body);
