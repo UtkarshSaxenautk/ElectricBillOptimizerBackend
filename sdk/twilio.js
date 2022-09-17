@@ -23,7 +23,7 @@ const Alert = (msg) => {
   client.messages.create({
      body: msg,
      from: '+18156571779',
-     to: '+91785259022'
+     to: '+917985259022'
    })
 }
 
