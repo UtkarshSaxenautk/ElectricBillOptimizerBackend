@@ -127,6 +127,6 @@ const CheckFeasibility = (userdata) => {
     const branddata = Recommend_by_item(userdata)
     return { hours_appliance_should_decrease, "msg": "failed" , branddata };
 }
-console.log(CheckFeasibility(sample_data));
+//console.log(CheckFeasibility(sample_data));
 module.exports = CheckFeasibility
 

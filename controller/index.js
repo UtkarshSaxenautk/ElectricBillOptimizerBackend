@@ -2,7 +2,8 @@ const ShowAppliance = require("../models/appliance.js");
 const Hourly = require("../models/hourlyReport.js");
 const  User  = require("../models/index.js");
 const Appliance = require('../models/item.js');
-const CheckFeasibility = require('../helpers/logic.js')
+const CheckFeasibility = require('../helpers/logic.js');
+const { exists } = require("../models/hourlyReport.js");
 
 const readAppliance = async (req, res) => {
     try {
@@ -41,15 +42,27 @@ const createUser = async (req, res) => {
     }
 }
 const sendHourlyReport = async (req, res) => {
-    const hour = await Hourly.findOne({ name: req.body.name });
+    const exist = await Hourly.exists({ id: req.body.id })
+    console.log(exist)
 
     try {
-        if (hour === null) {
-            const newhour = new Hourly(req.body);
-            newhour.save();
+        if (exist !== null) {
+            let currusage = await Hourly.findOne({ id: req.body.id })
+            console.log(currusage)
+            let mongoID = currusage._id
+            const addUsage = currusage.usage.power + parseInt(req.body.usage.power);
+            const temp = {power: addUsage , limit: true}
+            console.log(temp)
+            // currusage.updateOne({ id: req.body.id } , {usage : temp})
+            //Hourly.findByIdAndUpdate(mongoID, temp)
+            Hourly.findByIdAndUpdate(mongoID, {$set:{usage:temp}}).then(result => {
+                console.log('result', result)
+            })
+       // res.json({redirect : '/get-topic'})
         }
         else {
-           await hour.update("$push" , {hoursUsed : req.body.hoursUsed})
+            const report = new Hourly(req.body);
+            await report.save()
         }
         
         res.status(201).json("Hurray hourly data posted successfully");

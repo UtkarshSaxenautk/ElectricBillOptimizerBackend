@@ -6,7 +6,7 @@ const HourlyReport = new mongoose.Schema({
         type: 'number',
         required: true,
     },
-    usage: [{
+    usage: {
         power: {
             type: 'number',
             required: true,
@@ -15,12 +15,11 @@ const HourlyReport = new mongoose.Schema({
             type: 'boolean',
             required:true,
         }
-    }
-    ],
-    timeSent: {
-        type: 'Date',
-        required:true,
-    }
+    },
+    // timeSent: {
+    //     type: 'Date',
+    //     required:true,
+    // }
 })
 
 
