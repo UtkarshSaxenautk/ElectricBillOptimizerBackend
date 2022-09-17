@@ -72,13 +72,29 @@ function breakIntodays(exp_bill) {
 }
 
 
-const Recommend_by_item = (userdata , extra_per_day_power) => {
+const Recommend_by_item = (userdata) => {
+    const recommendedItem = [];
+    const included = [];
     for (let i = 0; i < userdata.appliances.length; i++) {
-        if (userdata.appliances[i].name === "bulb") {
-           
-       }
+        if (userdata.appliances[i].name === "bulb" && included.includes(userdata.appliances[i].name) == false ) {
+            recommendedItem.push({ "name": userdata.appliances[i].name, "brand": "Havells", "power": 5 })
+            included.push(userdata.appliances[i].name)
+        }
+        if (userdata.appliances[i].name === "fan" &&included.includes(userdata.appliances[i].name) == false  ) {
+            recommendedItem.push({ "name": userdata.appliances[i].name, "brand": "Orpat", "power": 40 })
+            included.push(userdata.appliances[i].name)
+        }
+        if (userdata.appliances[i].name === "ac" &&included.includes(userdata.appliances[i].name) == false  ) {
+            recommendedItem.push({ "name": userdata.appliances[i].name, "brand": "Voltas", "power": 2500 })
+            included.push(userdata.appliances[i].name)
+        }
+        if (userdata.appliances[i].name === "tube" &&included.includes(userdata.appliances[i].name) == false  ) {
+            recommendedItem.push({ "name": userdata.appliances[i].name, "brand": "Havells", "power": 25 })
+            included.push(userdata.appliances[i].name)
+        }
         
     }
+    return recommendedItem
 }
 
 const CheckFeasibility = (userdata) => {
@@ -105,7 +121,8 @@ const CheckFeasibility = (userdata) => {
         var extra_hours = per_appliance_chnaged_needed / userdata.appliances[i].power;
         hours_appliance_should_decrease.push({name : userdata.appliances[i].name , extraminutes : Math.round(extra_hours*60) , brand: userdata.appliances[i].brand })
     }
-    return { hours_appliance_should_decrease, "msg": "failed" };
+    const branddata = Recommend_by_item(userdata)
+    return { hours_appliance_should_decrease, "msg": "failed" , branddata };
 }
 
 console.log(CheckFeasibility(sample_data));
