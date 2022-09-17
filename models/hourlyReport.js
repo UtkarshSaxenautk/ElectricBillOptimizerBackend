@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 
 const HourlyReport = new mongoose.Schema({
-    name: {
-        type: 'string',
+    id: {
+        type: 'number',
         required: true,
     },
     usage: [{
-        hour: {
+        power: {
             type: 'number',
             required: true,
         },
