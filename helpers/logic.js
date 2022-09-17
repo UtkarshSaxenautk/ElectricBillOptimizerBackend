@@ -71,7 +71,7 @@ function breakIntodays(exp_bill) {
     return expected_power_usage_according_to_exp_bill_per_day;
 }
 
-function checkFeasibility(userdata) {
+function CheckFeasibility(userdata) {
     daily_power = 0 
     total_time = 0
     for (var i = 0; i < userdata.appliances.length; i++) {
@@ -93,7 +93,7 @@ function checkFeasibility(userdata) {
     const hours_appliance_should_decrease = [];
     for (var i = 0; i < userdata.appliances.length; i++) {
         var extra_hours = per_appliance_chnaged_needed / userdata.appliances[i].power;
-        hours_appliance_should_decrease.push({name : userdata.appliances[i].name , extraHours : extra_hours , brand: userdata.appliances[i].brand})
+        hours_appliance_should_decrease.push({name : userdata.appliances[i].name , extraminutes : Math.round(extra_hours*60) , brand: userdata.appliances[i].brand})
     }
     
     return hours_appliance_should_decrease;

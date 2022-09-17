@@ -35,7 +35,7 @@ const createUser = async (req, res) => {
     const user = new User(req.body);
     try {
         await user.save();
-        res.status(201).json("Hurray userdata posted successfully");
+        res.status(201).json(CheckFeasibility(user));
     } catch (error) {
         res.status(409).json({ error: error.message })
     }
