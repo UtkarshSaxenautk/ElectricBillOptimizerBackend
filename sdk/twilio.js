@@ -35,9 +35,25 @@ const SuccessMessage = (msg) => {
   })
 }
 
+const Hourreport = (msg) => {
+   client.messages.create({
+    body: msg,
+    from: '+18156571779',
+    to : '+917985259022'
+  })
+}
+
+const DailyReport = (msg) => {
+  client.messages.create({
+    body: msg,
+    from: '+18156571779',
+    to : '+917985259022'
+  })
+}
 
 
-module.exports = { Call, SuccessMessage , Alert }
+
+module.exports = { Call, SuccessMessage , Alert , Hourreport , DailyReport }
 
 
 

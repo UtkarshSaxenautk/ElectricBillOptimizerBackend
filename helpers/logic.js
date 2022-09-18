@@ -148,6 +148,61 @@ const CheckLimit = ( userData , hourdata , curr) => {
     }
     return { value: true, appliance: name } ;
 }
+
+const CheckUsage = (appliancedata, curr_usage_of_all) => {
+    for (let i = 0; i < curr_usage_of_all.length; i++) {
+        if (curr_usage_of_all[i].id === appliancedata.id) {
+            const power = appliancedata.power *appliancedata.expectedhour;
+            if (curr_usage_of_all[i].usage.power > power) {
+            return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+const Alternate = (userData ,curr_usage_of_all , curr_app) => {
+    var curr_name;
+    var curr_power;
+    console.log(curr_app , " ..." , curr_usage_of_all);
+    for (let i = 0; i < userData.appliances.length; i++) {
+        if (userData.appliances[i].id === curr_app.id) {
+            curr_name = userData.appliances[i].name;
+            curr_power = userData.appliances[i].power * userData.appliances[i].expectedhour;
+            break;
+        }
+    }
+    var length = 0;
+    var feasibleAppliances = [];
+   
+    for (let i = 0; i < userData.appliances.length; i++){
+        if (userData.appliances[i].id !== curr_app.id) {
+            if (CheckUsage(userData.appliances[i], curr_usage_of_all)) {
+                length++;
+                feasibleAppliances.push({ name: userData.appliances[i].name, power: userData.appliances[i].power , id : userData.appliances[i].id });
+            }
+        }
+    }
+    var diff =  curr_app.usage.power - curr_power;
+    console.log("length: " + length)
+    console.log(diff)
+    const temp_diff = diff / length
+    console.log(temp_diff);
+    
+    if (diff > 0) {
+        var suggest = [];
+        for (let i = 0; i < feasibleAppliances.length; i++){
+            const time_reduction = Math.round(temp_diff / feasibleAppliances[i].power)
+             suggest.push({name: feasibleAppliances[i].name, time: `${time_reduction}hours` , id : feasibleAppliances[i].id})
+        }
+        return {diff : diff , name : curr_name, suggestion : suggest };
+    }
+    return null;
+    
+}
+
+
 //console.log(CheckFeasibility(sample_data));
-module.exports = { CheckFeasibility, CheckLimit }
+module.exports = { CheckFeasibility, CheckLimit , Recommend_by_item , Alternate }
 

@@ -8,4 +8,6 @@ router.get('/appliance/:name', controller.readAppliance);
 router.post('/appliance', controller.writeAppliance);
 router.post('/hour', controller.sendHourlyReport)
 router.post('/postshowAppliance', controller.postShowAppliance)
+router.get('/report/:hourcount', controller.getHourReport)
+router.get('/dailyreport/:user_id' , controller.getDailyReport)
 module.exports  =  router;
