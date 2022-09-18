@@ -5,7 +5,7 @@ const authToken = '55098536abd03cf0969bf77d1f4bffae'; // Your Auth Token from ww
 const parsePhoneNumber = require('libphonenumber-js');
 
 
-const client = require("twilio")(accountSid, authToken);
+const client = require("twilio")(accountSid|process.env.ACCOUNTSID, authToken|process.env.AUTHTOKEN);
 
 const Call = () => {
   
