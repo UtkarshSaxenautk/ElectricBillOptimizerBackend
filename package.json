@@ -24,6 +24,6 @@
     "libphonenumber-js": "^1.10.13",
     "mongoose": "^6.11.3",
     "nodemon": "^2.0.19",
-    "twilio": "^3.82.0"
+    "twilio": "^4.14.0"
   }
 }
